@@ -34,68 +34,16 @@ void Sable::deplacement(double t){
 }
 
 void Sable::ecriture_fichier(){
-   /* ofstream contour("contour", ios::out | ios::trunc);
-    if(contour){
-            contour.close();
-        }
-    else{
-                cerr << "Impossible d'ouvrir le fichier !" << endl;
-            }
-    ofstream segment("segment", ios::out | ios::trunc);
-    if(segment) {
-
-        segment.close();
-        }
-    else{
-        cerr << "Impossible d'ouvrir le fichier !" << endl;
-        }*/
     for(int i = 0 ; i < nbg ; ++i){
         g[i]->ecriture_fichier("contour","segment");
     }
-    //system("gnuplot gnutest");
-
 }
 
 double Sable::distance(Grain* g1, Grain* g2){
     double dist = pow((g1->X[0]-g2->X[0]),2) + pow((g1->X[1]-g2->X[1]),2) + pow((g1->X[2]-g2->X[2]),2);
     return dist;
 }
-/*
-void Sable::creation_contact(){
 
-    double d1 = distance(g[0],g[1]);
-    double d2 = distance(g[0],g[2]);
-    double d3 = distance(g[1],g[2]);
-
-   Contact* contact1 = new Contact();
-    if (d1<pow(g[0]->rayon + g[1]->rayon,2)){
-        contact1->initialiseContact(g[0],g[1], sqrt(d1), 1);
-        cout<<"Contact 1 est actif " << contact1->n[0] <<endl;
-    }
-    else if (d1>=(g[0]->rayon + g[1]->rayon) ) {
-        cout<<"pas de contact entre les grains"<<endl;
-    }
-
-    Contact* contact2 = new Contact();
-    if (d2<(g[0]->rayon + g[2]->rayon)){
-        contact2->initialiseContact(g[0],g[2],d1,1);
-        cout<<"Contact 2 est actif " << contact2->n[0] <<endl;
-    }
-    else if (d2>=(g[0]->rayon + g[2]->rayon)){
-         cout<<"pas de contact entre les grains"<<endl;
-    }
-
-    Contact* contact3 = new Contact();
-    if (d3<(g[1]->rayon + g[2]->rayon)){
-        contact3->initialiseContact(g[1],g[2],d1,1);
-        cout<<"Contact 3 est actif " << contact3->n[0] <<endl;
-    }
-    else if (d3>=(g[1]->rayon + g[2]->rayon)){
-         cout<<"pas de contact entre les grains"<<endl;
-    }
-
-}
-*/
 
 void Sable::afficher_image(int t, StockContacts* stock){
             //cout << t << endl;
@@ -148,6 +96,7 @@ void Sable::simulation(double duree , double dt , int frequence_affichage){
 
     /* Vidage du stock et de la liste de contacts du sable */
     stock->videStock();
+    delete stock;
     stock = NULL;
     videContactsSable();
     videGrainsSable();
@@ -157,6 +106,8 @@ void Sable::simulation(double duree , double dt , int frequence_affichage){
     system("rm *.png");
     system("animate animation.gif");
 }
+
+
 void Sable::suppressionContactsOuverts(StockContacts* stock) // parcours de la liste + calcul de distance
 {
     if (c != NULL) { // liste a au moins 1 elt
