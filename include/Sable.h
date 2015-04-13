@@ -26,7 +26,7 @@ class Sable
         double distance(Grain* g1 , Grain* g2);
         //void creation_contact();
         void simulation(double duree , double dt , int frequence_affichage);
-        void ajout_Bloc(int nombre, double coord[3], double rayon, double epsi);
+        void ajout_Bloc(int nombre, double coord[3], double v[3], double rayon, double epsi);
         void afficher_image(int t, StockContacts* stock);
             // Gestion de la liste de contacts
         void suppressionContactsOuverts(StockContacts* stock); // parcours de la liste + calcul de distance
