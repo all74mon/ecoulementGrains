@@ -25,6 +25,9 @@ int main()
     X[1] = 30;
     X[2] = 0;
     double v[3];
+    v[0] = -1;
+    v[1] = -5;
+    v[2] = 0;
     double teta[3];
     double omega[3];
     double r = 1;
@@ -36,8 +39,10 @@ int main()
     double cs = 0;
     Sable sable(21);
     cout<< "DEBUG_MAIN : sable declare"<<endl;
-    sable.ajout_Bloc(20,X,1,0.5);   // Vitesse en parametre => faire tests
+    sable.ajout_Bloc(20,X, v,1,0.5);   // Vitesse en parametre => faire tests
     cout << "DEBUG_MAIN :ajout_Bloc utilisé" <<endl;
+
+    /*Ajout grain paroie*/
     X[0] = 0 ;
     X[1] = 20 ;
     X[2] = 0 ;
@@ -50,12 +55,12 @@ int main()
     ks = 0.1;
     paroie = true;
     sable.ajouteGrain(paroie, X,v,teta,omega,r,m,J,kn,ks,cn,cs);
+
     cout << "DEBUG_MAIN :nombre de grains dans le sable : "<< sable.nbg <<endl;
 
-    /* Second bloc : monte */
+    /*Lancement simulation*/
+    sable.simulation(1 , 0.05 , 1);
 
-
-    sable.simulation(0.5 , 0.001 , 20);
 
     return 0;
 }

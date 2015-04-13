@@ -47,7 +47,7 @@ double Sable::distance(Grain* g1, Grain* g2){
 /* Affichage image + renouvellement periodique du sotck */
 void Sable::afficher_image(int t, StockContacts* stock){
             //cout << t << endl;
-            /*
+
             int nbChiffres = 0;
             int t_temp = t;
             while (t_temp > 0){
@@ -66,7 +66,7 @@ void Sable::afficher_image(int t, StockContacts* stock){
             system("gnuplot gnutest");
             system("rm contour");
             system("rm segment");
-            ecriture_fichier(); */
+            ecriture_fichier();
 
             /* Vider le stock de grains si nb de contacts depasse MAXCONTACTS */
             stock->videStock(MAXCONTACTS);
@@ -112,9 +112,10 @@ void Sable::simulation(double duree , double dt , int frequence_affichage){
 
 
     // DEBUG
-    //system("convert -delay 5 -loop 0 *.png animation.gif ");
-    //system("rm *.png");
-    //system("animate animation.gif");
+    system("convert -delay 5 -loop 0 *.png animation.gif ");
+    system("rm *.png");
+    system("animate animation.gif");
+    cout << "DEBUG : FIN SIMULATION " << endl;
 }
 
 
@@ -282,7 +283,7 @@ void Sable::afficherListeSable(){
 }
 
 
-void Sable::ajout_Bloc(int nombre, double coord[3], double rayon, double epsi){ //coordonnes du grain en haut a gauche
+void Sable::ajout_Bloc(int nombre, double coord[3], double v[3], double rayon, double epsi){ //coordonnes du grain en haut a gauche
     cout<<"debut fonction ajout_Bloc"<<endl;
     int nbg_cote;
     int i = 2;
@@ -300,11 +301,11 @@ void Sable::ajout_Bloc(int nombre, double coord[3], double rayon, double epsi){ 
         }
         cout<<"DEBUG_SABLE : fin boucle : longueur du coté = " << nbg_cote <<endl;
         bool paroie = false;
-        double v[3];
+        //double v[3];
         double teta[3];
         double omega[3];
         for(int i = 0; i<3 ; i++){
-            v[i] = 0;
+            //v[i] = 0;
             teta[i] = 0;
             omega[i] = 0;
         }

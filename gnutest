@@ -1,5 +1,5 @@
 set term pngcairo
-set output "output00480.png"
+set output "output00019.png"
 set xrange [-50:50]
 set yrange [-37:37]
 plot 'contour' using 1:2:3 with circles, 'segment' using 1:2 with lines
