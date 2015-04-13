@@ -9,7 +9,6 @@
 #include "StockContacts.h"
 #include <sstream>
 
-#define MAXCONTACTS 20
 
 
 using namespace std;

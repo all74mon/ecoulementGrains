@@ -44,9 +44,10 @@ double Sable::distance(Grain* g1, Grain* g2){
     return dist;
 }
 
-
+/* Affichage image + renouvellement periodique du sotck */
 void Sable::afficher_image(int t, StockContacts* stock){
             //cout << t << endl;
+            /*
             int nbChiffres = 0;
             int t_temp = t;
             while (t_temp > 0){
@@ -65,7 +66,8 @@ void Sable::afficher_image(int t, StockContacts* stock){
             system("gnuplot gnutest");
             system("rm contour");
             system("rm segment");
-            ecriture_fichier();
+            ecriture_fichier(); */
+
             /* Vider le stock de grains si nb de contacts depasse MAXCONTACTS */
             stock->videStock(MAXCONTACTS);
 }
@@ -88,11 +90,18 @@ void Sable::simulation(double duree , double dt , int frequence_affichage){
         if(compteur%frequence_affichage ==0){
 
             afficher_image(compteur, stock);
+            // DEBUG
+            stock->afficherListe();
+            afficherListeSable();
         }
         deplacement(dt);  // deplacement d'un pas de temps
 
         compteur ++;
     }
+
+    // DEBUG: listes devraient etre vides
+    stock->afficherListe();
+    afficherListeSable();
 
     /* Vidage du stock et de la liste de contacts du sable */
     stock->videStock();
@@ -102,9 +111,10 @@ void Sable::simulation(double duree , double dt , int frequence_affichage){
     videGrainsSable();
 
 
-    system("convert -delay 5 -loop 0 *.png animation.gif ");
-    system("rm *.png");
-    system("animate animation.gif");
+    // DEBUG
+    //system("convert -delay 5 -loop 0 *.png animation.gif ");
+    //system("rm *.png");
+    //system("animate animation.gif");
 }
 
 
@@ -271,89 +281,6 @@ void Sable::afficherListeSable(){
     }
 }
 
-/*void Sable::simulation(double duree , double dt , int frequence_affichage){
-    cout << "DEBUG_SABLE :  Simulation lancee" << endl;
-    cout << "DEBUG_SABLE :  nombre de grains : "<< this->nbg << endl;
-
-    int compteur = 0;
-    int t = 0;
-    //int temps = 10;
-    //char* nomfile = "sortie";
-    int nbChiffres;
-    int t_temp;
-    double d1;
-    /*double d2;
-    double d3;
-   /* int d1_p;
-    int d2_p;
-    int d3_p;*/
-    //Contact* c1 = new Contact();
-    //Contact* c2 = new Contact();
-   // Contact* c3 = new Contact();
-    /*Contact* c1_p = new Contact();
-    Contact* c2_p = new Contact();
-    Contact* c3_p = new Contact();*/
-
-    //for (double i = 0; i <= duree; i+=dt){
-     //   d1 = distance(g[0],g[1]);
-        //d2 = distance(g[1],g[2]);
-        //d3 = distance(g[0],g[1]);
-        //d1_p = distance(g[0],g[3]);
-        //d2_p = distance(g[1],g[3]);
-        //d3_p = distance(g[2],g[3]);
-       // if(d1 > g[1]->rayon - g[0]->rayon){
-            //cout<<" Contact cree distance entre le grain 1 et la paroie = " << g[1]->rayon - d1 <<endl;
-          //  c3->initialiseContact(g[0],g[1],d1 , dt);
-       // }
-        /*if(d2 > g[2]->rayon - g[1]->rayon){
-            c1->initialiseContact(g[1],g[2], d2 , dt);
-        }
-        if(d3 < g[0]->rayon + g[1]->rayon){
-            c2->initialiseContact(g[0],g[1],d3 , dt);
-        }
-
-       /* if(d1_p>g[3]->rayon-g[0]->rayon){
-            c1_p->initialiseContact(g[3],g[0],g[3]->rayon-d1_p , dt);
-        }
-        if(d2_p>g[3]->rayon-g[1]->rayon){
-            c2_p->initialiseContact(g[3],g[1],g[3]->rayon-d2_p , dt);
-        }
-        if(d3_p>g[3]->rayon-g[2]->rayon){
-            c3_p->initialiseContact(g[3],g[2],g[3]->rayon-d3_p , dt);
-            c3_p-> metAjourEfforts(g[3]->rayon-d3_p,dt);
-        }*/
-
-       /* if(compteur%frequence_affichage ==0){
-            //cout << t << endl;
-            nbChiffres = 0;
-            t_temp = t;
-            while (t_temp > 0){
-                t_temp /= 10;
-                nbChiffres++;
-            }
-            stringstream sstm;
-            sstm << "\"output";
-            for(int i = 1 ; i<= 5-nbChiffres ; i++){
-                sstm << 0;
-            }
-            sstm << t << ".png\"";
-            string ans = sstm.str();
-            char * ans2 = (char *) ans.c_str();
-            g[0]->ecrireGnuplot("gnutest",ans2,50);
-            system("gnuplot gnutest");
-            system("rm contour");
-            system("rm segment");
-            ecriture_fichier();
-        }
-    t++;
-   // cout << "DEBUG_SABLE :nombre de grains dans le sable : "<< this->nbg <<endl;
-    deplacement(dt);
-    compteur ++;
-    }
-    system("convert -delay 5 -loop 0 *.png animation.gif ");
-    system("rm *.png");
-    system("animate animation.gif");
-}*/
 
 void Sable::ajout_Bloc(int nombre, double coord[3], double rayon, double epsi){ //coordonnes du grain en haut a gauche
     cout<<"debut fonction ajout_Bloc"<<endl;

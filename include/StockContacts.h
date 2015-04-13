@@ -2,6 +2,8 @@
 #define STOCKCONTACTS_H
 #include "Contact.h"
 
+#define MAXCONTACTS 20 // nb contats max dans la liste de contacts
+
 
 class StockContacts
 {

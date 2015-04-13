@@ -18,6 +18,8 @@ int main()
 {
 //    int frequence_affichage = 20;
     bool paroie = false;
+
+/* Premier bloc : descend */
     double X[3];
     X[0] = 0;
     X[1] = 30;
@@ -49,6 +51,10 @@ int main()
     paroie = true;
     sable.ajouteGrain(paroie, X,v,teta,omega,r,m,J,kn,ks,cn,cs);
     cout << "DEBUG_MAIN :nombre de grains dans le sable : "<< sable.nbg <<endl;
+
+    /* Second bloc : monte */
+
+
     sable.simulation(0.5 , 0.001 , 20);
 
     return 0;
