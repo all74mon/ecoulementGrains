@@ -10,17 +10,16 @@ class StockContacts
     public:
         StockContacts();
         virtual ~StockContacts();
-        Contact* getContact();
-        int setContact(Contact* C);
-        void videStock(int NBCMAX);
-        void videStock();
-        void afficherStock();
-        int getNbContacts() {return nbc;}
-        void afficherListe();
+        Contact* get_contact();
+        int set_contact(Contact* C);
+        void vide_stock(int NBCMAX);
+        void vide_stock();
+        void affiche_stock();
+        void affiche_contacts_stock();
 
+    // attributs
         Contact* c;
         int nbc;
-    //private:
 };
 
 #endif // STOCKCONTACTS_H

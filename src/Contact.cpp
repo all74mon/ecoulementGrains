@@ -18,16 +18,16 @@ Contact::Contact(){
 }
 
 
-void Contact::initialiseContact(Grain* G1, Grain* G2, double distance, double dt) {
+void Contact::initialise_contact(Grain* G1, Grain* G2, double distance, double dt) {
     g1 = G1;
     g2 = G2;
-    metAjourEfforts(distance, dt);
+    met_a_jour_efforts(distance, dt);
 }
 
 /* met a jour les efforts de contact en 3D */
 //On distingue les cas où il y a une paroie parmis les deux grains en entrée pour l'instant on suppose que le deuxième grain en entrée
 //sera celui succeptible d'etre une paroie
-void Contact::metAjourEfforts(double distance, double dt)
+void Contact::met_a_jour_efforts(double distance, double dt)
 {
 
     for(int i = 0 ; i<3 ; i++){ // pour les 3 dimensions
@@ -46,7 +46,12 @@ void Contact::metAjourEfforts(double distance, double dt)
             g2->m[i] += -g2->rayon*n[i]*F_s[i];
 
         }
-        else{
+        else{   // grains normaux
+
+            if (i == 0) { // debug
+                cout<<  "Valeur de la distance : " << distance  <<endl;
+            }
+
             n[i] = (g2->X[i]-g1->X[i])/distance;
             v[i] = (g1->v[i] - g2->v[i]) - (g2->omega[i]*g2->rayon + g1->omega[i]*g1->rayon)*n[i];
             vs[i] = v[i] - (v[i]*n[i])*n[i] + (g2->omega[i]*g2->rayon + g1->omega[i]*g1->rayon)*n[i];
@@ -59,7 +64,6 @@ void Contact::metAjourEfforts(double distance, double dt)
             g2->f[i] += -F_n[i] - F_s[i];
             g1->m[i] += g1->rayon*n[i]*F_s[i];
             g2->m[i] += -g2->rayon*n[i]*F_s[i];
-            cout<<  "Valeur de la distance : " << distance  <<endl;
 
         }
         //cout<<"Valeur de la force dans X["<<  i <<"] sur g1 :" << g1->f[i] <<endl;

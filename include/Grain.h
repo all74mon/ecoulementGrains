@@ -11,8 +11,6 @@ class Grain
         ~Grain();
         void deplacement(double t);
         void afficher_positions();
-        void ecriture_fichier(string fichContour, string fichSegment);
-        void ecrireGnuplot(string gnupl, char* image, int largeur); // écrit le code du fichier gnuplot
 
     //private:
         bool paroie;

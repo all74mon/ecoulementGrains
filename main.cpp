@@ -8,6 +8,7 @@
 #include <math.h>
 #include <sstream>
 
+#include <string> // debug
 
 
 using namespace std;
@@ -16,35 +17,49 @@ using namespace std;
 
 int main()
 {
-//    int frequence_affichage = 20;
+    int freq_affichage = 1;
     bool paroie = false;
 
-/* Premier bloc : descend */
+    /* Declaration du tas de sable*/
+    Sable sable(71); // taille max du sable 71
+
+    /* Premier bloc : descend */
     double X[3];
     X[0] = 0;
-    X[1] = 30;
+    X[1] = 20;
     X[2] = 0;
     double v[3];
-    v[0] = -1;
+    v[0] = 0;
     v[1] = -5;
     v[2] = 0;
     double teta[3];
+    teta[0] = 0;
+    teta[1] = 0;
+    teta[2] = 0;
     double omega[3];
-    double r = 1;
+    omega[0] = PI/4;
+    omega[1] = PI/4;
+    omega[2] = 0;
+    double r = 1.0;
     double m = 1;
     double J = 1;
     double kn = 20;
     double ks = 0.1;
     double cn = 0;
     double cs = 0;
-    Sable sable(21);
-    cout<< "DEBUG_MAIN : sable declare"<<endl;
-    sable.ajout_Bloc(20,X, v,1,0.5);   // Vitesse en parametre => faire tests
-    cout << "DEBUG_MAIN :ajout_Bloc utilisé" <<endl;
+   sable.ajout_bloc(10 ,X, v,1,0.5);   // Vitesse en parametre => faire tests
+
+
+    /* Ajout du second bloc = monte */
+    X[1] = -25;
+    v[1] = 20;
+    //cout << "DEBUG_MAIN: ajout du second bloc" << endl;
+    sable.ajout_bloc(10 ,X, v, 1.01, 0.5);
+
 
     /*Ajout grain paroie*/
     X[0] = 0 ;
-    X[1] = 20 ;
+    X[1] = 0 ;
     X[2] = 0 ;
     v[0] = 0 ;
     v[1] = 0 ;
@@ -54,12 +69,28 @@ int main()
     kn = 500;
     ks = 0.1;
     paroie = true;
-    sable.ajouteGrain(paroie, X,v,teta,omega,r,m,J,kn,ks,cn,cs);
+    sable.ajout_grain(paroie, X,v,teta,omega,r,m,J,kn,ks,cn,cs);
 
-    cout << "DEBUG_MAIN :nombre de grains dans le sable : "<< sable.nbg <<endl;
+    /*Definition du path + Lancement simulation*/
 
-    /*Lancement simulation*/
-    sable.simulation(1 , 0.05 , 1);
+        // path: là ou il y a les fichiers segment, contour et gnutest
+    string path ="D:\\UNIV_2014_2015_L3\\S2\\stage_applicatif\\ecoulementGrains\\";
+
+        // path 2 : path avec " et "\\"
+    string path2 = "\"";  // guillemets => Ne pas toucher
+
+    path2 += "D:\\";     // PATH => A completer
+    path2 += "\\";       // "\\" double slash => a rajouter a chaque fois
+    path2 += "UNIV_2014_2015_L3\\";
+    path2 += "\\";
+    path2 += "S2\\";
+    path2 += "\\";
+    path2 += "stage_applicatif\\";
+    path2 += "\\";
+    path2 += "ecoulementGrains\\" ;
+    path2 += "\\";
+
+    sable.simulation(2, 0.25 , freq_affichage, &path, &path2);
 
 
     return 0;

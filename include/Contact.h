@@ -8,10 +8,10 @@ class Contact
     public:
         Contact();
         virtual ~Contact(){};
-        void initialiseContact(Grain* G1, Grain* G2, double distance, double dt);
-        void metAjourEfforts(double distance, double dt);
+        void initialise_contact(Grain* G1, Grain* G2, double distance, double dt);
+        void met_a_jour_efforts(double distance, double dt);
 
-    //private:
+    // attributs
         double n[3];        //Vecteurs unitaire des positions relatives entre les deux grains
         double s[3];
         double v[3];        //Vecteur vitesse relative des deux grains

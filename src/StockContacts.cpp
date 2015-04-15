@@ -10,11 +10,11 @@ StockContacts::StockContacts()
 StockContacts::~StockContacts()
 {
     if (c != NULL) { // vider le stock
-        videStock();
+        vide_stock();
     }
 }
 
-Contact* StockContacts::getContact()
+Contact* StockContacts::get_contact()
 {
     if (c == NULL) {
         return new Contact();
@@ -28,7 +28,7 @@ Contact* StockContacts::getContact()
 }
 
 // Renvoie 1 => erreur, 0 si OK
-int StockContacts::setContact(Contact* C)
+int StockContacts::set_contact(Contact* C)
 {
     if (C == NULL) {
         cerr << "StockContacts::setContact : Contacts NULL non ranges" << endl;
@@ -43,7 +43,7 @@ int StockContacts::setContact(Contact* C)
 }
 
 // Vider le stock quoi qu'il en soit
-void StockContacts::videStock()
+void StockContacts::vide_stock()
 {
     Contact* temp = NULL;
 
@@ -58,7 +58,7 @@ void StockContacts::videStock()
 }
 
 // Vider le stock si trop de grains (cf NBCMAX)
-void StockContacts::videStock(int NBCMAX)
+void StockContacts::vide_stock(int NBCMAX)
 {
     if (nbc >= NBCMAX) {
         Contact* temp = NULL;
@@ -71,16 +71,16 @@ void StockContacts::videStock(int NBCMAX)
     }
 }
 
-void StockContacts::afficherStock()
+void StockContacts::affiche_stock()
 {
     cout << "Nombre de contacts stockes: " << nbc << endl;
 }
 
 
-void StockContacts::afficherListe(){
+void StockContacts::affiche_contacts_stock(){
     Contact* temp = c;
     int indice = 1;
-    cout << "----- Afficher Liste Stock -----" << endl;
+    cout << "----- Afficher Stock Contacts -----" << endl;
     if (temp == NULL) {
         cout << "liste vide" << endl;
     } else {
