@@ -42,10 +42,15 @@
 		<Unit filename="src/Contact.cpp" />
 		<Unit filename="src/Grain.cpp" />
 		<Unit filename="src/Sable.cpp" />
+		<Unit filename="src/Sable_Contacts.cpp" />
+		<Unit filename="src/Sable_Fichiers.cpp" />
+		<Unit filename="src/Sable_Simulation.cpp" />
+		<Unit filename="src/Sable_Stock_Grains.cpp" />
 		<Unit filename="src/StockContacts.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
