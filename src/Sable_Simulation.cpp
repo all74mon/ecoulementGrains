@@ -37,7 +37,7 @@ void Sable::simulation(double duree , double dt , int frequence_affichage,
         }
 
         /* Effacement de gnutest*/
-        system( ("del " + *path + "gnutest").c_str() );
+        system( ("rm " + *path + "gnutest").c_str() );
 
         /* Vidage du stock et de la liste de contacts du sable */
         stock->vide_stock();
@@ -50,13 +50,13 @@ void Sable::simulation(double duree , double dt , int frequence_affichage,
         cvertPng += *path;
         cvertPng += "*.png";
         cvertPng += " animation.gif ";
-        string delPng = "del ";
+        string delPng = "rm ";
         delPng += *path;
         delPng += "*.png";
         system(cvertPng.c_str() );
         system(delPng.c_str() );
 
-        //system("animate animation.gif");
+        system("animate animation.gif");
         cout << "DEBUG : FIN SIMULATION " << endl;
 
     }

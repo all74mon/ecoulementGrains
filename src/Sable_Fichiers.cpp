@@ -79,8 +79,8 @@ void Sable::afficher_image(int t, StockContacts* stock, string *path, string *pa
             system( ("gnuplot " + *path + "gnutest").c_str() ) ;
 
             /*Suppression segment et contour */
-            system( ("del " + *path + "segment").c_str() );
-            system( ("del " + *path + "contour").c_str() );
+            system( ("rm " + *path + "segment").c_str() );
+            system( ("rm " + *path + "contour").c_str() );
 
             /* Vider le stock de grains si nb de contacts depasse MAXCONTACTS */
             stock->vide_stock(MAXCONTACTS);

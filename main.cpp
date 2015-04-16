@@ -74,21 +74,12 @@ int main()
     /*Definition du path + Lancement simulation*/
 
         // path: là ou il y a les fichiers segment, contour et gnutest
-    string path ="D:\\UNIV_2014_2015_L3\\S2\\stage_applicatif\\ecoulementGrains\\";
+    string path ="";
 
         // path 2 : path avec " et "\\"
     string path2 = "\"";  // guillemets => Ne pas toucher
 
-    path2 += "D:\\";     // PATH => A completer
-    path2 += "\\";       // "\\" double slash => a rajouter a chaque fois
-    path2 += "UNIV_2014_2015_L3\\";
-    path2 += "\\";
-    path2 += "S2\\";
-    path2 += "\\";
-    path2 += "stage_applicatif\\";
-    path2 += "\\";
-    path2 += "ecoulementGrains\\" ;
-    path2 += "\\";
+
 
     sable.simulation(2, 0.25 , freq_affichage, &path, &path2);
 
