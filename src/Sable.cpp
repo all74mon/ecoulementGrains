@@ -8,6 +8,7 @@ Sable::Sable(int CAPA){
         g[i] = NULL;
     }
     c = NULL;
+    casiers = new ListeCasiers();
 }
 
 Sable::~Sable(){

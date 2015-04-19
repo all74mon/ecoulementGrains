@@ -74,7 +74,7 @@ void Sable::afficher_image(int t, StockContacts* stock, string *path, string *pa
 
             /* Creation image png avec gnuplot */
             char * ans2 = (char *) temp.c_str();
-            ecrire_gnuplot("gnutest",ans2,50, path);
+            ecrire_gnuplot("gnutest",ans2,100, path);
             ecriture_fichier(path);
             system( ("gnuplot " + *path + "gnutest").c_str() ) ;
 

@@ -34,13 +34,17 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Casier.h" />
 		<Unit filename="include/Contact.h" />
 		<Unit filename="include/Grain.h" />
+		<Unit filename="include/ListeCasiers.h" />
 		<Unit filename="include/Sable.h" />
 		<Unit filename="include/StockContacts.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Casier.cpp" />
 		<Unit filename="src/Contact.cpp" />
 		<Unit filename="src/Grain.cpp" />
+		<Unit filename="src/ListeCasiers.cpp" />
 		<Unit filename="src/Sable.cpp" />
 		<Unit filename="src/Sable_Contacts.cpp" />
 		<Unit filename="src/Sable_Fichiers.cpp" />

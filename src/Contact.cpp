@@ -49,7 +49,7 @@ void Contact::met_a_jour_efforts(double distance, double dt)
         else{   // grains normaux
 
             if (i == 0) { // debug
-                cout<<  "Valeur de la distance : " << distance  <<endl;
+                //cout<<  "Valeur de la distance : " << distance  <<endl;
             }
 
             n[i] = (g2->X[i]-g1->X[i])/distance;

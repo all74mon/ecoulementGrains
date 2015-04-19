@@ -5,7 +5,6 @@
 void Sable::suppression_contacts_ouverts(StockContacts* stock) // parcours de la liste + calcul de distance
 {
     if (c != NULL) { // liste a au moins 1 elt
-        cout<<"JE PASSE dANS suppressionContactsOuverts"<<endl;
        static int nbSuppressions = 1;
         // traitement des n premiers contacts ouverts successifs
         while ( c != NULL && distance(c->g1, c->g2) > pow(c->g1->rayon + c->g2->rayon , 2) && (c->g1->paroie == false) && (c->g2->paroie == false) ) {
@@ -14,10 +13,8 @@ void Sable::suppression_contacts_ouverts(StockContacts* stock) // parcours de la
             stock->set_contact(curs); // rendre le contact au stock
             curs = NULL;
             nbSuppressions++;
-                // DEBUG
-            cout << "\n\n---- DEBUG: Suppression contact ouvert ----" << endl;
-            stock->affiche_contacts_stock();
-            affiche_contacts_sable();
+            // stock->affiche_contacts_stock();  // DEBUG
+            // affiche_contacts_sable();
         }
 
         // Traitement des contacts suivants
@@ -34,10 +31,8 @@ void Sable::suppression_contacts_ouverts(StockContacts* stock) // parcours de la
                     stock->set_contact(old); // rendre le contact au stock
                     old = NULL;
                     nbSuppressions++;
-                        // DEBUG
-                    cout << "\n\n---- DEBUG: Suppression contact ouvert ----" << endl;
-                    stock->affiche_contacts_stock();
-                    affiche_contacts_sable();
+                    //stock->affiche_contacts_stock();   // DEBUG
+                    //affiche_contacts_sable();
                 } else { // ferme
                     prec = curs;
                     curs = curs->next;
@@ -54,14 +49,10 @@ void Sable::suppression_contacts_ouverts(StockContacts* stock) // parcours de la
 void Sable::cherche_nouveaux_contacts(StockContacts* stock, double dt) { // sys casiers + examiner couples de grains
     Grain* g1 =NULL;
     Grain* g2 = NULL;
-
-    cout << "DEBUG - SABLE- CHERCHE NOUVEAUXCONTACTS : AVANT LES WHILE" << endl;
-
     double eps = 1e-3; // à 10-3 pres
-
-    cout << "PRECISION VAUT   " << eps << endl;
     int i = 0;
     int j = 0;
+
     while (i <= taille -2 && g[i] != NULL) {
         g1 = g[i];
         j = i + 1;
@@ -72,17 +63,10 @@ void Sable::cherche_nouveaux_contacts(StockContacts* stock, double dt) { // sys 
             if ( ( (pow(g1->rayon + g2->rayon, 2) - d2) > eps
                   || ( abs(pow(g1->rayon + g2->rayon, 2) - d2) <= eps) )
                   && (g1->paroie == false) && (g2->paroie == false) ) {
-                cout<<"JE VOIS UN CONTACT"<<endl;
-                cout << "Distance au carre vaut " << d2 << "   et la somme des rayons au carre vaut " << pow(g1->rayon + g2->rayon, 2)
-                    << endl;
-                cout << "abs(d2 - pow(g1->rayon + g2->rayon, 2))   " << abs(d2 - pow(g1->rayon + g2->rayon, 2)) << endl;
-
                 if ( !contact_present(g1, g2) ) {
                     insertion_contact(g1, g2, stock, sqrt(d2), dt);
-                        // DEBUG
-                    cout << "\n\n---- DEBUG: contact insere dans sable ----" << endl;
-                    stock->affiche_contacts_stock();
-                    affiche_contacts_sable();
+                    // stock->affiche_contacts_stock();  // DEBUG
+                    // affiche_contacts_sable();
                 }
             }
             j++;
@@ -91,13 +75,6 @@ void Sable::cherche_nouveaux_contacts(StockContacts* stock, double dt) { // sys 
         i++;
     }
 
-    cout << "\n\n\n ----- Affichage liste de grains et numeros ----- " << endl;
-    int z = 0;
-    while (g[z] != NULL) {
-        cout << (z + 1) << " " << g[z] << " -";
-        z++;
-    }
-    cout << endl;
 }
 
 
@@ -105,7 +82,6 @@ void Sable::cherche_nouveaux_contacts(StockContacts* stock, double dt) { // sys 
 void Sable::update_liste_contacts(double dt) { // sys casiers + examiner couples de grains
 
     if (c != NULL) { // liste non vide
-    cout<<"j'UPDATE  UN CONTACT"<<endl;
         Contact * curs = c;
         while (curs != NULL) {
             double d = sqrt( distance_carre(curs->g1, curs->g2) );
@@ -122,7 +98,7 @@ void Sable::affiche_contacts_sable(){
     Contact* temp = c;
     int indice = 1;
 
-    cout << "----- Afficher Liste Sable -----" << endl;
+    cout << "----- Afficher Contacts du Sable -----" << endl;
 
     if (temp == NULL) {
         cout << "liste vide" << endl;
@@ -130,8 +106,8 @@ void Sable::affiche_contacts_sable(){
 
         while(temp != NULL) {
             cout << "elt " << indice << " : " << endl;
-            cout << "   grain1: " << temp->g1 << endl;
-            cout << "   grain2: " << temp->g2 << endl;
+            cout << "   grain1: " << temp->g1->id << endl;
+            cout << "   grain2: " << temp->g2->id << endl;
             temp = temp->next;
             indice++;
         }
