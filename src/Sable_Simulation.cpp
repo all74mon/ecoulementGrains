@@ -30,7 +30,8 @@ int Sable::etape_simulation(int compteur, double pavage[3], StockContacts* stock
 /* efface gnutest + vide stock contacts, pteurs des casiers et contacts du sable */
  void Sable::effacements(string* path, StockContacts* stock) {
 
-    system( ("del " + *path + "gnutest").c_str() );
+    // WINDOWS : system( ("del " + *path + "gnutest").c_str() );
+	system( ("rm " + *path + "gnutest").c_str() );
 
     stock->vide_stock();
     delete stock;
@@ -53,13 +54,13 @@ void Sable::genere_animation(string* path) {
     cvertPng += *path;
     cvertPng += "*.png";
     cvertPng += " animation.gif ";
-    string delPng = "del ";
+        // WINDOWS : string delPng = "del ";
+    string delPng = "rm ";
     delPng += *path;
     delPng += "*.png";
     system(cvertPng.c_str() );
     system(delPng.c_str() );
-
-    // LINUX : system("animate animation.gif");
+    system("animate animation.gif");
 }
 
 /* Lancement d'une simulation */

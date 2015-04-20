@@ -86,10 +86,10 @@ int main()
     }
 
     /*Definition du path + Lancement simulation */
-        // path: là ou il y a les fichiers segment, contour et gnutest
-    string path ="D:\\UNIV_2014_2015_L3\\S2\\stage_applicatif\\ecoulementGrains\\";
+        // WINDOWS: string path ="D:\\UNIV_2014_2015_L3\\S2\\stage_applicatif\\ecoulementGrains\\";
+	string path = "";
 
-        // path 2 : path avec " et "\\"
+        /* WINDOWS
     string path2 = "\"";  // guillemets => Ne pas toucher
 	path2 += "D:\\";
 	path2 += "\\";
@@ -100,7 +100,8 @@ int main()
 	path2 += "stage_applicatif\\";
 	path2 += "\\";
 	path2 += "ecoulementGrains\\";
-	path2 += "\\";
+	path2 += "\\"; */
+	string path2 = "\"";
 
 
     // PAS DE TEMPS 10^-3
