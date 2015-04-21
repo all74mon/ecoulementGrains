@@ -19,8 +19,20 @@ Contact::Contact(){
 
 
 void Contact::initialise_contact(Grain* G1, Grain* G2, double distance, double dt) {
-    g1 = G1;
-    g2 = G2;
+    if(G1->paroie == false && G2->paroie == false){
+        g1 = G1;
+        g2 = G2;
+    }
+    else if(G1->paroie == true || G2->paroie == true){
+        if(G1->paroie == true){
+            g1 = G2;
+            g2 = G1;
+        }
+        else{
+            g1 = G1;
+            g2 = G2;
+        }
+    }
     met_a_jour_efforts(distance, dt);
 }
 
@@ -33,8 +45,8 @@ void Contact::met_a_jour_efforts(double distance, double dt)
     for(int i = 0 ; i<3 ; i++){ // pour les 3 dimensions
         if(g2->paroie == true){
             n[i] = -(g2->X[i]-g1->X[i])/distance;       //vecteur direction UNITAIRE
-            v[i] = -(g1->v[i] - g2->v[i]) - (g2->omega[i]*g2->rayon + g1->omega[i]*g1->rayon)*n[i];
-            vs[i] = -v[i] + (v[i]*n[i])*n[i] + (g2->omega[i]*g2->rayon + g1->omega[i]*g1->rayon)*n[i];
+            v[i] = - (g1->v[i] - g2->v[i]) + (g2->omega[i]*g2->rayon + g1->omega[i]*g1->rayon)*n[i];
+            vs[i] = -v[i] + (v[i]*n[i])*n[i] - (g2->omega[i]*g2->rayon + g1->omega[i]*g1->rayon)*n[i];
             deltan[i] = v[i]*n[i]*dt ;
             deltas[i] = vs[i]*dt ;
             F_n[i] = ((-g2->kn * deltan[i])-(g2->cn * v[i]))*n[i];
@@ -49,10 +61,10 @@ void Contact::met_a_jour_efforts(double distance, double dt)
         else{   // grains normaux
 
             if (i == 0) { // debug
-                cout<<  "Valeur de la distance : " << distance  <<endl;
+                //cout<<  "Valeur de kn : " << g1->kn  <<endl;
             }
 
-            n[i] = (g2->X[i]-g1->X[i])/distance;
+            n[i] = (g1->X[i]-g2->X[i])/distance;
             v[i] = (g1->v[i] - g2->v[i]) - (g2->omega[i]*g2->rayon + g1->omega[i]*g1->rayon)*n[i];
             vs[i] = v[i] - (v[i]*n[i])*n[i] + (g2->omega[i]*g2->rayon + g1->omega[i]*g1->rayon)*n[i];
             deltan[i] = v[i]*n[i]*dt ;
@@ -61,12 +73,24 @@ void Contact::met_a_jour_efforts(double distance, double dt)
             F_s[i] = (-g1->ks * deltas[i])-(g1->cs * vs[i]);
             // Loi de Coulomb a ajouter si pb
             g1->f[i] += (F_n[i] + F_s[i]);
+            //cout<<  "Valeur de f pour le grain 1 : " << g1->f[i]  <<endl;
             g2->f[i] += -F_n[i] - F_s[i];
-            g1->m[i] += g1->rayon*n[i]*F_s[i];
-            g2->m[i] += -g2->rayon*n[i]*F_s[i];
-
+            //cout<<  "Valeur de f pour le grain 2 : " << g2->f[i]  <<endl;
+            g1->m[i] += -g1->rayon*n[i]*F_s[i];
+            g2->m[i] += g2->rayon*n[i]*F_s[i];
         }
         //cout<<"Valeur de la force dans X["<<  i <<"] sur g1 :" << g1->f[i] <<endl;
 
     }
+}
+
+void Contact::reinitialise_efforts(){
+
+    for(int i = 0 ; i<3 ;i++){
+         g1->f[i] = 0;
+         g2->f[i] = 0;
+         g1->m[i] = 0;
+         g2->m[i] = 0;
+    }
+
 }

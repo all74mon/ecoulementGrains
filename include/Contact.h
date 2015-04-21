@@ -10,6 +10,7 @@ class Contact
         virtual ~Contact(){};
         void initialise_contact(Grain* G1, Grain* G2, double distance, double dt);
         void met_a_jour_efforts(double distance, double dt);
+        void reinitialise_efforts();
 
     // attributs
         double n[3];        //Vecteurs unitaire des positions relatives entre les deux grains

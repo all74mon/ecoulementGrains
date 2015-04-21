@@ -86,8 +86,8 @@ void StockContacts::affiche_contacts_stock(){
     } else {
         while(temp != NULL) {
             cout << "elt " << indice << " : " << endl;
-            cout << "   grain1: " << temp->g1 << endl;
-            cout << "   grain2: " << temp->g2 << endl;
+            cout << "   grain1: " << temp->g1->id << endl;
+            cout << "   grain2: " << temp->g2->id << endl;
             temp = temp->next;
             indice++;
         }

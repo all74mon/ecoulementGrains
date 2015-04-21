@@ -7,8 +7,7 @@
 #include <fstream>
 #include <math.h>
 #include <sstream>
-
-#include <string> // debug
+#include <string>
 
 
 using namespace std;
@@ -17,44 +16,54 @@ using namespace std;
 
 int main()
 {
-    int freq_affichage = 1;
+    int freq_affichage = 500;
     bool paroie = false;
 
     /* Declaration du tas de sable*/
     Sable sable(71); // taille max du sable 71
 
-    /* Premier bloc : descend */
+    /* Premier bloc : descend*/
     double X[3];
-    X[0] = 0;
-    X[1] = 20;
+    X[0] = 10;
+    X[1] = 0;
     X[2] = 0;
     double v[3];
-    v[0] = 0;
-    v[1] = -5;
+    v[0] = -10;
+    v[1] = 0;
     v[2] = 0;
     double teta[3];
     teta[0] = 0;
     teta[1] = 0;
     teta[2] = 0;
     double omega[3];
-    omega[0] = PI/4;
-    omega[1] = PI/4;
+    omega[0] = 0;
+    omega[1] = 0;
     omega[2] = 0;
-    double r = 1.0;
+    double r = 10;
     double m = 1;
     double J = 1;
-    double kn = 20;
-    double ks = 0.1;
+    double kn = 500;
+    double ks = 5;
     double cn = 0;
     double cs = 0;
-   sable.ajout_bloc(10 ,X, v,1,0.5);   // Vitesse en parametre => faire tests
-
+    sable.ajout_grain(paroie, X,v,teta,omega,r,m,J,kn,ks,cn,cs);
+    X[0] = -10;
+    X[1] = 10;
+    v[0] = 10;
+    //sable.ajout_grain(paroie, X,v,teta,omega,r,m,J,kn,ks,cn,cs);
+    //sable.ajout_bloc(3 ,X, v, teta, omega,kn,ks,r,0.5);
 
     /* Ajout du second bloc = monte */
-    X[1] = -25;
-    v[1] = 20;
-    //cout << "DEBUG_MAIN: ajout du second bloc" << endl;
-    sable.ajout_bloc(10 ,X, v, 1.01, 0.5);
+    X[0] = 0;
+    X[1] = 8;
+    v[0] = 0;
+    v[1] = 30;
+    v[2] = 0;
+    teta[0] = PI;
+    teta[1] = PI;
+    omega[0] = PI/4;
+    omega[1] = 0;
+    //sable.ajout_bloc(2 ,X, v, teta, omega,kn,ks, r, 0.5);
 
 
     /*Ajout grain paroie*/
@@ -64,70 +73,47 @@ int main()
     v[0] = 0 ;
     v[1] = 0 ;
     v[2] = 0 ;
-    r = 30;
+    r = 75;
     m = 10000;
-    kn = 500;
-    ks = 0.1;
+    kn = 100;
+    ks = 5;
+    teta[0] = PI;
+    teta[1] = PI;
+    omega[0] = 0;
+    omega[1] = 0;
     paroie = true;
     sable.ajout_grain(paroie, X,v,teta,omega,r,m,J,kn,ks,cn,cs);
 
-    /*Definition du path + Lancement simulation*/
+    /* Definition manuelle du pavage */
+    double pavage[3];
+    for (int i = 0; i < 3; i++) {
+        pavage[i] = 10.0;
+    }
 
+    /*Definition du path + Lancement simulation */
         // path: là ou il y a les fichiers segment, contour et gnutest
-    string path ="D:\\UNIV_2014_2015_L3\\S2\\stage_applicatif\\ecoulementGrains\\";
+    // WINDOWS : string path ="D:\\UNIV_2014_2015_L3\\S2\\stage_applicatif\\ecoulementGrains\\";
+    string path =""; // LINUX
 
         // path 2 : path avec " et "\\"
+    /* WINDOWS :
     string path2 = "\"";  // guillemets => Ne pas toucher
+	path2 += "D:\\";
+	path2 += "\\";
+	path2 += "UNIV_2014_2015_L3\\";
+	path2 += "\\";
+	path2 += "S2\\";
+	path2 += "\\";
+	path2 += "stage_applicatif\\";
+	path2 += "\\";
+	path2 += "ecoulementGrains\\";
+	path2 += "\\";   */
+	string path2 = "\"";  // LINUX
 
-    path2 += "D:\\";     // PATH => A completer
-    path2 += "\\";       // "\\" double slash => a rajouter a chaque fois
-    path2 += "UNIV_2014_2015_L3\\";
-    path2 += "\\";
-    path2 += "S2\\";
-    path2 += "\\";
-    path2 += "stage_applicatif\\";
-    path2 += "\\";
-    path2 += "ecoulementGrains\\" ;
-    path2 += "\\";
 
-    sable.simulation(2, 0.25 , freq_affichage, &path, &path2);
+    // PAS DE TEMPS 10^-3
+    sable.simulation(50, 0.001 , freq_affichage, pavage, &path, &path2);
 
 
     return 0;
 }
-
-
-
-//////   ANCIENS TESTS
-
-    /* TESTS STOCK CONTACTS => MARCHE NICKEL
-    cout << "\n---------- TEST DE STOCKS CONTACT ------------\n" << endl;
-    int dt = 1; // pas de temps
-
-    StockContacts* stock = new StockContacts();
-    stock->afficherStock();
-    Contact* c1 = stock->getContact();
-    c1->initialiseContact(sable.g[0], sable.g[1], distance(sable.g[0], sable.g[1]), dt);
-    stock->setContact(c1);
-
-    stock->afficherStock();
-    stock->videStock(2);
-    Contact *c2 = stock->getContact();
-    Contact *c3 = stock->getContact();
-    Contact *c4 = stock->getContact();
-
-
-    stock->afficherStock();
-    stock->setContact(c2);
-    stock->setContact(c3);
-    stock->setContact(c4);
-    stock->afficherStock();
-    //stock->videStock(2);
-    stock->afficherStock();
-    cout << "----------Nombre de contacts stockes: " << stock->getNbContacts() << endl;
-
-    //stock->videStock();
-    stock->afficherStock();
-
-    delete stock;
-    stock = NULL; */

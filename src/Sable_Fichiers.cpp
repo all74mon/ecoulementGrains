@@ -40,7 +40,7 @@ void Sable::ecrire_gnuplot(string gnupl, char* image, int largeur, string *path)
         gnu << "set term pngcairo" << endl;
         gnu << "set output " << image << endl; // écriture
         gnu << "set xrange [" << -largeur << ":" << largeur << "]" << endl;
-        gnu << "set yrange [" << -3*largeur/4 << ":" << 3*largeur/4 << "]" << endl;
+        gnu << "set yrange [" << -4*largeur/5 << ":" << 5*largeur/6 << "]" << endl;
         gnu << "plot '" << *path <<"contour'"<<" using 1:2:3 with circles, '"
             << *path << "segment'" << " using 1:2 with lines" << endl;
         gnu.close();  // on ferme le fichier
@@ -74,13 +74,15 @@ void Sable::afficher_image(int t, StockContacts* stock, string *path, string *pa
 
             /* Creation image png avec gnuplot */
             char * ans2 = (char *) temp.c_str();
-            ecrire_gnuplot("gnutest",ans2,50, path);
+            ecrire_gnuplot("gnutest",ans2,200, path);
             ecriture_fichier(path);
             system( ("gnuplot " + *path + "gnutest").c_str() ) ;
 
             /*Suppression segment et contour */
-            system( ("del " + *path + "segment").c_str() );
-            system( ("del " + *path + "contour").c_str() );
+            // WINDOWS : system( ("del " + *path + "segment").c_str() );
+            // WINDOWS : system( ("del " + *path + "contour").c_str() );
+            system( ("rm " + *path + "segment").c_str() );
+            system( ("rm " + *path + "contour").c_str() );
 
             /* Vider le stock de grains si nb de contacts depasse MAXCONTACTS */
             stock->vide_stock(MAXCONTACTS);
