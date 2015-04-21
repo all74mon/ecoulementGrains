@@ -130,6 +130,7 @@ void Sable::cherche_nouveaux_contacts(StockContacts* stock, double dt) { // sys 
         }
 
         i++;
+
     }
 
 }

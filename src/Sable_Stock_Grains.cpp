@@ -30,6 +30,7 @@ void Sable::ajout_grain(bool PAROIE, const double coord[3], const double v[3] , 
     g[ifin] = nouveauGrain;
     ifin++;
     cout << "DEBUG: ajoute Grain: grain ajoute " << nouveauGrain << "---- valeur de ifin: " << ifin << endl;
+
 }
 
 

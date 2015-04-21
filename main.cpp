@@ -22,6 +22,7 @@ int main()
     /* Declaration du tas de sable*/
     Sable sable(71); // taille max du sable 71
 
+
     /* Premier bloc : descend*/
     double X[3];
     X[0] = 10;
@@ -31,6 +32,7 @@ int main()
     v[0] = -10;
     v[1] = 0;
     v[2] = 0;
+
     double teta[3];
     teta[0] = 0;
     teta[1] = 0;
@@ -89,6 +91,7 @@ int main()
     for (int i = 0; i < 3; i++) {
         pavage[i] = 10.0;
     }
+
 
     /*Definition du path + Lancement simulation */
         // path: là ou il y a les fichiers segment, contour et gnutest
