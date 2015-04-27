@@ -52,6 +52,7 @@ void Sable::ajout_bloc(int nombre, double epsi, const double X[3], const double 
                 verif = true;
             }
             i++;
+
         }
 
         bool paroie = false;
@@ -60,7 +61,9 @@ void Sable::ajout_bloc(int nombre, double epsi, const double X[3], const double 
         while (compteur<nombre-1){
             for (int j =0; j<nbg_cote; j++){
                 for (int i = 0; i<nbg_cote;i++){
+
                     this->ajout_grain(paroie,coord,v,teta,omega,rayon,masse,J,kn,ks,cn,cs);
+
                     coord[0] += 2*rayon + epsi ;
                     compteur++;
                     if(compteur==nombre){
@@ -93,4 +96,5 @@ void Sable::vide_grains() {
         delete g;
         g = NULL;
     }
+
 }

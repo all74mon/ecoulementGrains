@@ -22,6 +22,7 @@ Contact::Contact(){
 }
 
 
+
 void Contact::initialise_contact(Grain* G1, Grain* G2, double dt) {
     if(G1->paroie == false && G2->paroie == false){
         g1 = G1;
@@ -174,4 +175,3 @@ void Contact::reinitialise_efforts_contact() {
     }
 
 }
-

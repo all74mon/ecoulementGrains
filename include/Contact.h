@@ -25,7 +25,6 @@ class Contact
         double deltas[3];   //Vecteur deplacement relatif dans la direction tangentielle
         double delta_fn[3];      //vecteur variation force normale du contact
         double delta_fs[3];      //vecteur variation force de cisaillement du contact
-
         double fn[3]; // force resultante
         double fs[3];
         int nb_dt;      //Durée du contact en nombre de pas de temps

@@ -2,7 +2,6 @@
 
 /** Gestion de la liste de contacts du sable */
 
-
 /////////// RECHERCHE NOUVEAUX CONTACTS AVEC PAVAGE /////////////////
 
 /*  on cherche les nouveaux contacts grace au pavage
@@ -146,6 +145,7 @@ void Sable::cherche_nouveaux_contacts(StockContacts* stock, double dt) { // sys 
     double eps = 0; // à 10-3 pres
     int i = 0;
     int j = 0;
+
 
     while (i <= taille -2 && g[i] != NULL) {
         g1 = g[i];

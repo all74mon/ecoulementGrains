@@ -42,6 +42,7 @@ class Grain
         double cn;          //Coefficient normal d'amortissement
         double cs;          //Coefficient tangentiel d'amortissement
 
+
     private:
         // Liste du pavage
         Grain* p;       // Pointeur sur le grain precedent

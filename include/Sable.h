@@ -17,7 +17,6 @@ using namespace std;
 class Sable
 {
     public:
-
         // Constructeur et destructeur de Sable
         Sable(int CAPA);
         virtual ~Sable();
@@ -62,6 +61,7 @@ class Sable
         void effacements(string* path, StockContacts* stock);
         void afficher_image(int t, StockContacts* stock, string *path, string *path2);
         void genere_animation(string* path);
+
 
         // Gestion de la liste de contacts
         void suppression_contacts_ouverts(StockContacts* stock); // parcours de la liste + calcul de distance

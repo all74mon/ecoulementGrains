@@ -9,6 +9,7 @@
 #include <sstream>
 #include <string>
 
+
 using namespace std;
 
 int main()
@@ -20,6 +21,7 @@ int main()
 
     /* Declaration du tas de sable*/
     Sable sable(71); // taille max du sable 71
+
 
     /* Premier Grain : descend*/
     X[0] = -0.1;
@@ -104,11 +106,11 @@ int main()
 
     /*Definition du path + Lancement simulation */
     // path: là ou il y a les fichiers segment, contour et gnutest
-    string path ="D:\\UNIV_2014_2015_L3\\S2\\stage_applicatif\\ecoulementGrains\\"; //WINDOWS:
-    //LINUX string path ="";
+    //WINDOWS: string path ="D:\\UNIV_2014_2015_L3\\S2\\stage_applicatif\\ecoulementGrains\\";
+    string path =""; //LINUX
 
     // path 2 : path avec " et "\\"
-    /* WINDOWS: */
+    /* WINDOWS:
     string path2 = "\"";  // guillemets => Ne pas toucher
 	path2 += "D:\\";
 	path2 += "\\";
@@ -119,8 +121,8 @@ int main()
 	path2 += "stage_applicatif\\";
 	path2 += "\\";
 	path2 += "ecoulementGrains\\";
-	path2 += "\\";
-	 //LINUX string path2 = "\"";
+	path2 += "\\"; */
+    string path2 = "\""; //LINUX
 
 
     // Defintion paramètres de temps et de frequence pour simulation

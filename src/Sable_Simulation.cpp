@@ -53,8 +53,8 @@ int Sable::etape_simulation(int compteur, StockContacts* stock, double dt, int f
 /* efface gnutest + vide stock contacts, contacts du sable, et pavage */
  void Sable::effacements(string* path, StockContacts* stock) {
 
-    system( ("del " + *path + "gnutest").c_str() ); //WINDOWS :
-    //LINUX: system( ("rm " + *path + "gnutest").c_str() );
+    //WINDOWS : system( ("del " + *path + "gnutest").c_str() );
+    system( ("rm " + *path + "gnutest").c_str() ); //LINUX:
 
     stock->vide_stock(); // vidage du stock de contacts
     delete stock;
@@ -70,13 +70,13 @@ void Sable::genere_animation(string* path) {
     cvertPng += *path;
     cvertPng += "*.png";
     cvertPng += " animation.gif ";
-    string delPng = "del ";  // WINDOWS
-    //LINUX: string delPng = "rm ";
+    // WINDOWS: string delPng = "del ";
+    string delPng = "rm "; //LINUX:
     delPng += *path;
     delPng += "*.png";
     system(cvertPng.c_str() );
     system(delPng.c_str() );
-    // LINUX : system("animate animation.gif");
+    system("animate animation.gif"); // LINUX :
 }
 
 /* Lancement d'une simulation */
@@ -93,17 +93,17 @@ void Sable::simulation(double duree , double dt , double coord_min[3], double co
 
         // Suppression des png et fichiers segment et contour precedents
         // => Precaution pour eviter les bugs
-        /* WINDOWS */
+        /* WINDOWS
         system( ("del " + *path + "*.png").c_str() );
         system( ("del " + *path + "segment").c_str() );
         system( ("del " + *path + "contour").c_str() );
-        system( ("del " + *path + "gnutest").c_str() );
+        system( ("del " + *path + "gnutest").c_str() ); */
 
-        /*LINUX
+        /*LINUX */
         system( ("rm " + *path + "*.png").c_str() );
         system( ("rm " + *path + "segment").c_str() );
         system( ("rm " + *path + "contour").c_str() );
-        system( ("rm " + *path + "gnutest").c_str() ); */
+        system( ("rm " + *path + "gnutest").c_str() );
 
         int compteur = 0;
         double temps = 0.0;
@@ -161,4 +161,5 @@ double Sable::eg_sable() {
     }
 
     return eg;
+
 }
